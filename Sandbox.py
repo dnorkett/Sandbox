@@ -1,3 +1,4 @@
+"""Find the largest odd integer"""
 iterations = 10
 max = 0
 
