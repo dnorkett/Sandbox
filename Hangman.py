@@ -5,11 +5,7 @@ WORDLIST_FILENAME = "words.txt"
 
 
 def load_words():
-    """
-    Imports a list of all words contained in a dictionary txt file
-    """
     print("Loading word list from file...")
-    # inFile: file
     inFile = open(WORDLIST_FILENAME, 'r')
     # line: string
     line = inFile.readline()
@@ -20,15 +16,10 @@ def load_words():
 
 
 def choose_word(wordlist):
-    """
-    wordlist (list): list of words (strings)
-    Returns a word from wordlist at random
-    """
     return random.choice(wordlist)
 
 
 # Load the list of words into the variable wordlist
-# so that it can be accessed from anywhere in the program
 wordlist = load_words()
 
 
@@ -48,8 +39,7 @@ def get_guessed_word(secret_word, letters_guessed):
     '''
     secret_word: string, the word the user is guessing
     letters_guessed: list (of letters), which letters have been guessed so far
-    returns: string, comprised of letters, underscores (_), and spaces that represents
-      which letters in secret_word have been guessed so far.
+    returns: string that represents which letters in secret_word have been guessed so far.
     '''
     guessed_word = ''
     for char in secret_word:
@@ -63,12 +53,10 @@ def get_guessed_word(secret_word, letters_guessed):
 def get_available_letters(letters_guessed):
     '''
     letters_guessed: list (of letters), which letters have been guessed so far
-    returns: string (of letters), comprised of letters that represents which letters have not
-      yet been guessed.
+    returns: string comprised of letters that have not yet been guessed.
     '''
-    all_letters = string.ascii_lowercase
     available_letters = ''
-    for char in all_letters:
+    for char in string.ascii_lowercase:
         if char not in letters_guessed:
             available_letters += char
     return available_letters
@@ -77,19 +65,6 @@ def get_available_letters(letters_guessed):
 def hangman(secret_word):
     '''
     secret_word: string, the secret word to guess.
-    * Before each round, you should display to the user how many guesses
-      s/he has left and the letters that the user has not yet guessed.
-
-    * Ask the user to supply one guess per round. Remember to make
-      sure that the user puts in a letter!
-
-    * The user should receive feedback immediately after each guess
-      about whether their guess appears in the computer's word.
-
-    * After each guess, you should display to the user the
-      partially guessed word so far.
-
-    Follows the other limitations detailed in the problem write-up.
     '''
     secret_word = secret_word
     letters_guessed = []
@@ -183,18 +158,13 @@ def hangman_with_hints(secret_word):
 
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
+
     pass
 
 
 if __name__ == "__main__":
     secret_word = choose_word(wordlist)
     hangman(secret_word)
-
-###############
-
-# To test part 3 re-comment out the above lines and
-# uncomment the following two lines.
 
 # secret_word = choose_word(wordlist)
 # hangman_with_hints(secret_word)
