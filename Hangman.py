@@ -93,7 +93,7 @@ def hangman(secret_word):
     '''
     secret_word = secret_word
     letters_guessed = []
-    remaining_guesses = 6
+    remaining_guesses = 10
 
     print('Welcome to Hangman!')
     print('I am thinking of a word that is', str(len(secret_word)), 'letters long')
