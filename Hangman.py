@@ -62,11 +62,22 @@ def get_available_letters(letters_guessed):
     return available_letters
 
 
+def game_end(remaining_guesses, secret_word):
+    if remaining_guesses > 0:
+        score = remaining_guesses * len(set(secret_word))
+        print('-' * 50)
+        print("Congratulations! You Won!")
+        print('Your total score for this round:', str(score))
+    else:
+        print('-' * 50)
+        print("Sorry, you've run out of guesses!")
+        print("The secret word was:", secret_word)
+
+
 def hangman(secret_word):
     '''
     secret_word: string, the secret word to guess.
     '''
-    secret_word = secret_word
     letters_guessed = []
     remaining_guesses = 10
 
@@ -90,17 +101,7 @@ def hangman(secret_word):
             print('Oops! That letter is not in my word:', get_guessed_word(secret_word, letters_guessed))
             remaining_guesses -= 1
 
-    if remaining_guesses > 0:
-        score = remaining_guesses * len(set(secret_word))
-        print('-' * 50)
-        print("Congratulations! You Won!")
-        print('Your total score for this round:', str(score))
-    else:
-        print('-' * 50)
-        print("Sorry, you've run out of guesses!")
-        print("The secret word was:", secret_word)
-
-
+    game_end(remaining_guesses, secret_word)
 # -----------------------------------
 
 
