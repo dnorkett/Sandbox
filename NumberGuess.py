@@ -1,3 +1,4 @@
+#Use bisection search to determine a users guessed number
 answer = int(input("Enter a number to guess from 1 to 100: "))
 low = 1
 high = 100

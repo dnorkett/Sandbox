@@ -1,3 +1,4 @@
+#Use bisection search to determine square root
 answer = int(input("Enter a number: "))
 
 precision = .000000000001

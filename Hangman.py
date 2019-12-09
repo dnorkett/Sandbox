@@ -79,7 +79,7 @@ def hangman(secret_word):
     secret_word: string, the secret word to guess.
     '''
     letters_guessed = []
-    remaining_guesses = 10
+    remaining_guesses = 6
 
     print('Welcome to Hangman!')
     print('I am thinking of a word that is', str(len(secret_word)), 'letters long')
@@ -108,13 +108,15 @@ def hangman(secret_word):
 def match_with_gaps(my_word, other_word):
     '''
     my_word: string with _ characters, current guess of secret word
-    other_word: string, regular English word
+    other_word: string, secret word the player is guessing
     returns: boolean, True if all the actual letters of my_word match the
         corresponding letters of other_word, or the letter is the special symbol
         _ , and my_word and other_word are of the same length;
         False otherwise:
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
+    for char in strip(my_word):
+        if char != '_' and char
+    return True
     pass
 
 
@@ -164,8 +166,10 @@ def hangman_with_hints(secret_word):
 
 
 if __name__ == "__main__":
-    secret_word = choose_word(wordlist)
-    hangman(secret_word)
+    # while True:
+    #     print('*'*100)
+    #     secret_word = choose_word(wordlist)
+    #     hangman(secret_word)
 
 # secret_word = choose_word(wordlist)
 # hangman_with_hints(secret_word)
