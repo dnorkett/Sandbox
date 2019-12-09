@@ -115,13 +115,13 @@ def match_with_gaps(my_word, other_word):
         False otherwise:
     '''
     my_word = my_word.replace(" ", "")
-    print(my_word, other_word)
     if len(my_word) != len(other_word):
         return False
 
     for i in range(len(my_word)):
         if my_word[i] != other_word[i] and my_word[i] != '_':
             return False
+
     return True
 
 
