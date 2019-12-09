@@ -114,10 +114,15 @@ def match_with_gaps(my_word, other_word):
         _ , and my_word and other_word are of the same length;
         False otherwise:
     '''
-    for char in strip(my_word):
-        if char != '_' and char
+    my_word = my_word.replace(" ", "")
+    print(my_word, other_word)
+    if len(my_word) != len(other_word):
+        return False
+
+    for i in range(len(my_word)):
+        if my_word[i] != other_word[i] and my_word[i] != '_':
+            return False
     return True
-    pass
 
 
 def show_possible_matches(my_word):
@@ -170,6 +175,7 @@ if __name__ == "__main__":
     #     print('*'*100)
     #     secret_word = choose_word(wordlist)
     #     hangman(secret_word)
+
 
 # secret_word = choose_word(wordlist)
 # hangman_with_hints(secret_word)
