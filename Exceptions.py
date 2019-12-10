@@ -10,3 +10,7 @@ while True:
         print("Can't divide by zero")
     except:
         print("Something went very wrong")
+    else:
+        print("Completed with no exceptions")
+    finally:
+        print("Ended")
