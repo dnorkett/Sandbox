@@ -5,7 +5,7 @@ while True:
         print("a/b = ", a/b)
         print("a+b = ", a+b)
     except ValueError:
-        print("Could not convert to a number")
+        raise ValueError('Could not convert to a number')
     except ZeroDivisionError:
         print("Can't divide by zero")
     except:
