@@ -14,3 +14,7 @@ while True:
         print("Completed with no exceptions")
     finally:
         print("Ended")
+
+def avg(grades):
+    assert not len(grades) == 0, 'no grades data'
+    return sum(grades / len(grades))
