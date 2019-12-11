@@ -8,12 +8,14 @@ class Coordinate(object):
         self.y = y
 
     # Uninformative print representation by default, memory location
-    # Define a __str__ method for a class
     # Python calls the __str__ method when used with print on your class object
     # You get to choose what it shows
     def __str__(self):
         return "<"+str(self.x)+","+str(self.y)+">"
 
+    #Tell Python how to add two objects. Can also do for subtraction, length etc.
+    def __add__(self, other):
+        return "<"+str(self.x + other.x)+","+str(self.y+other.y)+">"
 
     #Methods - procedural attributes - functions that work within the class, how to interact with the object
     #Other than self and dot notation, behave similarly to functions (take params, do operations, return)
@@ -24,7 +26,7 @@ class Coordinate(object):
 
 #Calls Init. Sets self equal to c, origin. Creates X and Y attributes for object.
 c = Coordinate(3,4)
-zero = Coordinate(0,0)
+zero = Coordinate(1,1)
 
 #Data attributes of an instance are called instance variables
 print(c.x, ",",c.y)
@@ -34,4 +36,9 @@ print(zero.x," ",zero.y)
 print(c.distance(zero))
 print(Coordinate.distance(c,zero))
 
+print(type(c))
 print(c)
+print(isinstance(c,Coordinate))
+
+#Uses the __add__ method to add two Coordinate types together
+print(c+zero)
