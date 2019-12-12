@@ -42,3 +42,24 @@ print(isinstance(c,Coordinate))
 
 #Uses the __add__ method to add two Coordinate types together
 print(c+zero)
+
+print("*" * 100)
+
+class Fraction(object):
+    def __init__(self,numerator, denominator):
+        self.numerator = numerator
+        self.denominator = denominator
+    def __str__(self):
+        return str(self.numerator)+"/"+str(self.denominator)
+    def __add__(self, other):
+        return str((self.numerator*other.denominator) + (self.denominator*other.numerator)) + "/" + str(self.denominator*other.denominator)
+    def __sub__(self, other):
+        return str((self.numerator*other.denominator) - (self.denominator*other.numerator)) + "/" + str(self.denominator*other.denominator)
+
+fracTestA=Fraction(3,4)
+fracTestB=Fraction(1,4)
+print(fracTestA)
+print(fracTestB)
+print(fracTestA + fracTestB)
+print(fracTestA - fracTestB)
+
