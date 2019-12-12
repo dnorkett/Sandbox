@@ -47,6 +47,7 @@ print("*" * 100)
 
 class Fraction(object):
     def __init__(self,numerator, denominator):
+        asset type(numerator) == int and type(denominator) == int
         self.numerator = numerator
         self.denominator = denominator
     def __str__(self):
