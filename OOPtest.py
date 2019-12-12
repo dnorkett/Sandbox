@@ -47,7 +47,7 @@ print("*" * 100)
 
 class Fraction(object):
     def __init__(self,numerator, denominator):
-        asset type(numerator) == int and type(denominator) == int
+        assert type(numerator) == int and type(denominator) == int
         self.numerator = numerator
         self.denominator = denominator
     def __str__(self):
@@ -56,6 +56,8 @@ class Fraction(object):
         return str((self.numerator*other.denominator) + (self.denominator*other.numerator)) + "/" + str(self.denominator*other.denominator)
     def __sub__(self, other):
         return str((self.numerator*other.denominator) - (self.denominator*other.numerator)) + "/" + str(self.denominator*other.denominator)
+    def __float__(self):
+        return self.numerator / self.denominator
 
 fracTestA=Fraction(3,4)
 fracTestB=Fraction(1,4)
@@ -63,4 +65,6 @@ print(fracTestA)
 print(fracTestB)
 print(fracTestA + fracTestB)
 print(fracTestA - fracTestB)
+print(float(fracTestA))
+print(float(fracTestB))
 
