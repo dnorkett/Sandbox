@@ -58,6 +58,8 @@ class Fraction(object):
         return str((self.numerator*other.denominator) - (self.denominator*other.numerator)) + "/" + str(self.denominator*other.denominator)
     def __float__(self):
         return self.numerator / self.denominator
+    def inverse(self):
+        return Fraction(self.denominator, self.numerator)
 
 fracTestA=Fraction(3,4)
 fracTestB=Fraction(1,4)
@@ -67,4 +69,4 @@ print(fracTestA + fracTestB)
 print(fracTestA - fracTestB)
 print(float(fracTestA))
 print(float(fracTestB))
-
+print(fracTestA.inverse())
