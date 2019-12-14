@@ -178,4 +178,30 @@ print(don)
 don.change_major('CS')
 print(don)
 don.speak()
+print("*" * 100)
+
+#Instance variables - self.name, self.age etc.
+#Common across all instances of the class. Value different for all instances
+#Class variables - values are shared between all instances of a class
+class Rabbit(Animal):
+    tag = 1
+    def __init__(self, age, parent1=None, parent2=None):
+        Animal.__init__(self, age)
+        self.parent1 = parent1
+        self.parent2 = parent2
+        #assigning instance variable to class variable
+        self.r_id = Rabbit.tag
+        #tag used to give unique id to each new rabbit instance
+        Rabbit.tag +=1
+    def get_r_id(self):
+        #zfill pads start of a string with 0s to always be X digits long
+        return str(self.rid).zfill(3)
+    def get_parent1(self):
+        return self.parent1
+    def get_parent2(self):
+        return self.parent2
+    def __add__(self, other):
+        #returning object of same type as this class
+        #From init - 0 is age, self is parent1, other is parent2
+        return Rabbit(0, self, other)
 
