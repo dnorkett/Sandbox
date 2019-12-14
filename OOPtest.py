@@ -190,10 +190,10 @@ class Rabbit(Animal):
         self.parent1 = parent1
         self.parent2 = parent2
         #assigning instance variable to class variable
-        self.r_id = Rabbit.tag
+        self.rid = Rabbit.tag
         #tag used to give unique id to each new rabbit instance
         Rabbit.tag +=1
-    def get_r_id(self):
+    def get_rid(self):
         #zfill pads start of a string with 0s to always be X digits long
         return str(self.rid).zfill(3)
     def get_parent1(self):
@@ -204,4 +204,8 @@ class Rabbit(Animal):
         #returning object of same type as this class
         #From init - 0 is age, self is parent1, other is parent2
         return Rabbit(0, self, other)
+    def __eq__(self, other):
+        parents_same = self.parent1.rid == other.parent1.rid and self.parent2.rid == other.parent2.rid
+        parents_opposite = self.parent2.rid == other.parent1.rid and self.parent1.rid == other.parent2.rid
+        return parents_same or parents_opposite
 
