@@ -1,3 +1,5 @@
+import random
+
 class Coordinate(object):
     #Object parent is most basic type in Python
     #Data attributes - other objects that make up the class. Numbers, etc.
@@ -148,3 +150,32 @@ print(some_person.get_friends())
 other_person = Person("Ryan", 10)
 some_person.age_diff(other_person)
 print("*" * 100)
+
+
+#Subclass of Person, which is a subclass of Animal
+#Inherits Person and Animal attributes
+class Student(Person):
+    def __init__(self, name, age, major=None):
+        Person.__init__(self, name, age)
+        self.major = major
+    def change_major(self, major):
+        self.major = major
+    def speak(self):
+        r = random.random()
+        if r < 0.25:
+            print("I have homework")
+        elif .25 <= r < 0.5:
+            print("I need sleep")
+        elif .5 <= r < 0.75:
+            print("I should eat")
+        else:
+            print("I am watching TV")
+    def __str__(self):
+        return "student:"+str(self.name)+":"+str(self.age)+":"+str(self.major)
+
+don = Student('Don', 35)
+print(don)
+don.change_major('CS')
+print(don)
+don.speak()
+
