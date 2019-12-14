@@ -212,3 +212,24 @@ class Rabbit(Animal):
 print("*" * 100)
 rab1 = Rabbit(2)
 rab2 = Rabbit(2)
+
+print("----")
+print("rab1")
+print("----")
+print(rab1.get_rid())
+print(rab1.get_parent1())
+print(rab1.get_parent2())
+
+print("----")
+print("rab2")
+print("----")
+print(rab2.get_rid())
+print(rab2.get_parent1())
+print(rab2.get_parent2())
+
+print("----")
+print("rab3")
+print("----")
+rab3 = rab1 + rab2
+print(rab3.get_parent1())
+print(rab3.get_parent2())
