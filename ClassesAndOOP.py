@@ -209,3 +209,6 @@ class Rabbit(Animal):
         parents_opposite = self.parent2.rid == other.parent1.rid and self.parent1.rid == other.parent2.rid
         return parents_same or parents_opposite
 
+print("*" * 100)
+rab1 = Rabbit(2)
+rab2 = Rabbit(2)
