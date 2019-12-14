@@ -9,7 +9,6 @@ class Coordinate(object):
 
     # Uninformative print representation by default, memory location
     # Python calls the __str__ method when used with print on your class object
-    # You get to choose what it shows
     def __str__(self):
         return "<"+str(self.x)+","+str(self.y)+">"
 
@@ -63,10 +62,38 @@ class Fraction(object):
 
 fracTestA=Fraction(3,4)
 fracTestB=Fraction(1,4)
+
 print(fracTestA)
 print(fracTestB)
+
 print(fracTestA + fracTestB)
 print(fracTestA - fracTestB)
+
 print(float(fracTestA))
 print(float(fracTestB))
+
 print(fracTestA.inverse())
+
+print("*" * 100)
+
+
+#Class Animal is the parent class / super class
+class Animal(object):
+    def __init__(self,age):
+        self.age = age
+        self.name = None
+    def get_age(self):
+        return self.age
+    def get_name(self):
+        return self.name
+    def set_new_age(self, new_age):
+        self.age = new_age
+    def set_name(self, newname=""):
+        self.name = newname
+    def __str__(self):
+        return "animal:"+str(self.name)+":"+str(self.age)
+
+some_animal=Animal(12)
+print(some_animal)
+some_animal.set_name("Bob")
+print(some_animal)
