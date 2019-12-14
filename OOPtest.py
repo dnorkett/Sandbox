@@ -97,6 +97,8 @@ some_animal=Animal(12)
 print(some_animal)
 some_animal.set_name("Bob")
 print(some_animal)
+print("*" * 100)
+
 
 #Class Cat is a child class of Animal. Inherits all data objects and methods
 #__init__ not missing, it's using Animal's. Also inherits get_age, get_name etc.
@@ -106,6 +108,17 @@ class Cat(Animal):
     def __str__(self):
         return "cat:"+str(self.name)+":"+str(self.age)
 
+some_cat=Cat(3)
+print(some_cat)
+some_cat.speak()
+some_cat.set_name("Mittens")
+print(some_cat)
+print("*" * 100)
+
+
+#Calls Animal init method to initialize name and data attributes since it's already done in code
+#Can do other things in init, like set variables, call methods etc
+#Also creates new methods that are specific to Person sub-class
 class Person(Animal):
     def __init__(self, name, age):
         Animal.__init__(self,age)
@@ -114,7 +127,7 @@ class Person(Animal):
     def get_friends(self):
         return self.friends
     def add_friend(self, fname):
-        if fname not in self.friends():
+        if fname not in self.friends:
             self.friends.append(fname)
     def speak(self):
         print("Hello!")
@@ -124,4 +137,14 @@ class Person(Animal):
     def __str__(self):
         return "person:"+str(self.name)+":"+str(self.age)
 
+some_person = Person("James", 12)
+print(some_person)
+some_person.speak()
+print(some_person.get_friends())
+some_person.add_friend("Abby")
+some_person.add_friend("Ben")
+print(some_person.get_friends())
 
+other_person = Person("Ryan", 10)
+some_person.age_diff(other_person)
+print("*" * 100)
