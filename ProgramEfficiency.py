@@ -142,6 +142,18 @@ def intersect(L1,L2):
 #Answer to smaller version is answer to original problem
 # (n)/(2^i). Complexity is O(log n)
 
+
+#implementation 1
+#O(log n) bisection search calls
+    #on each recursive call, size of range to be searched cut in half
+    #if original size n, worst cast down to size 1 when n/(2^k) = k; or k = log n
+#O(n) for each bisection search call to copy list
+    #This is the cost to set up each call, so do this for each level of recursion
+#O(log n) * O(n) -> O(n log n)
+    #if we are careful, note that length of list to be copies is also halved
+    #turns out total cost to copy is O(n) and this dominates the log n cost due to recursive calls
+
+
 def bisect_search1(L,e):
     if L== []:
         return False
