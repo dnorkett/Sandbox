@@ -76,3 +76,13 @@ def fact_iter(n):
 #0.0001*n*log(n) + 300n = O(n log n)
 #2n^30 + 3^n = O(3^n). 3^n dominant over large numbers
 
+#Combine complexity classes
+    #analyze statements inside functions
+#Law of Multiplication for O():
+    #Used with nested statements/loops
+
+#Is O(n) * O(n) = O(n^2) because outer loop goes n times and inner loop goes n times for every outer loop tier
+for i in range(n):
+    for j in range(n):
+        print('a')
+
