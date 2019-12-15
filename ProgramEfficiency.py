@@ -33,3 +33,46 @@ def mysum(x):
     return total            #times number of loops, +1 operation for return
 
 
+#Option 3, ORDERS OF GROWTH
+#Best, Average, Worst Cases
+#Suppose you are given a list L of some length len(L)
+#Best case, minimum running time over all possible inputs
+    #constant for search_for_element
+    #first element in any list
+#Average case
+    #average running time, practical measure
+    # linear in length of list for search_for_elmt
+#Worst cast, maximum running time over all possible inputs
+    #linear in length of list for search_for_elmt
+    #must search entire list and not find it
+
+def search_for_element(L,e):
+    for i in L:
+        if i == e:
+            return True
+    return False
+
+#Focused on orders of growth. IE if I double the amount of data, what effect does this have
+#Linear - 2x data 2x time, Quadratic - 2x data 4x time etc.
+#Look at largest factors in runtime
+#Upper bound on growth as a function of the size of the input in the worst case
+#BIG O NOTATION!!!!!!
+
+def fact_iter(n):
+    """assumes n an int >= 0"""
+    answer=1                #1 op
+    while n>1:              #1 op
+        answer *= n         #2 ops
+        n-=1                #2 ops
+    return answer
+
+#Count steps - (1+5n+1)
+#In this case, grows linearly. 2x data = 2x time.  O(n)
+#Ignore additive and multiplicative constants, only focus on growth for large numbers
+
+#n² + 2n + 2 = O(n²). n² dominant term over large numbers
+#n² + 100000n + 3000000 = O(n²). n² still the dominant term over large numbers
+#log(n) + n + 4 = O(n). n grows faster than log(n)
+#0.0001*n*log(n) + 300n = O(n log n)
+#2n^30 + 3^n = O(3^n). 3^n dominant over large numbers
+
