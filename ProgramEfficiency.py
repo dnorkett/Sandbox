@@ -82,7 +82,76 @@ def fact_iter(n):
     #Used with nested statements/loops
 
 #Is O(n) * O(n) = O(n^2) because outer loop goes n times and inner loop goes n times for every outer loop tier
+#Nested loops typically have O(n^2)
 for i in range(n):
     for j in range(n):
         print('a')
+
+#Complexity cases
+#O(1) = constant, very rare
+#O(log n) = logarithmic running time
+#O(n) = linear running time
+#O(n log n) log-linear running time
+#O(n^c) polynomial running time (c is constant)
+#O(c^n) exponential running time (c is a constant being raised to a power based on the size of the input)
+
+#Linear search on unsorted list
+#Must look through all elementa to decide it's not there
+def linear_search(L,e):
+    found=false
+    for i in range(len(L)):     #Not using while=false reduces avg runtime (order of complexity), but does NOT change order of growth
+        if e==L[i]:
+            found = True
+    return found
+
+#Quadratic growth
+#Outer loop executed len(L1) times, inner loop executed len(L2) times.
+#n*n = n^2
+def isSubset(L1, L2):
+    for e1 in L1:
+        matched=False
+        for e2 in L2:
+            if e1 == e2:
+                matched=True
+                break
+            if not matched:
+                return False
+    return True
+
+#Still quadratic growth. N^2 + N, look at highest O
+def intersect(L1,L2):
+    tmp = []
+    for e1 in L1:
+        for e2 in L2:
+            if e1 == e2:
+                tmp.append(e1)
+    res = []
+    for e in tmp:
+        if not(e in res):
+            res.append(e)
+    return res
+
+
+#How does a choice in design affect efficiency of algorithm
+#Recognize standard patterns in algorithm design
+
+#Bisection search - RECAP
+#Pick an index, divide list in half. Ask if L[i] == e, if not ask smaller or larger
+#Depending on results, search left or right half of L for e
+#Break into smaller version of problem (smaller list) plus some simple operations
+#Answer to smaller version is answer to original problem
+# (n)/(2^i). Complexity is O(log n)
+
+def bisect_search1(L,e):
+    if L== []:
+        return False
+    elif len(L) == 1:
+        return L[0] == e
+    else:
+        half = len(L)//2
+        if L[half] > e:
+            return bisect_search1(L[:half], e)
+        else:
+            return bisect_search1(L[half:], e)
+
 
