@@ -152,8 +152,7 @@ def intersect(L1,L2):
 #O(log n) * O(n) -> O(n log n)
     #if we are careful, note that length of list to be copies is also halved
     #turns out total cost to copy is O(n) and this dominates the log n cost due to recursive calls
-
-
+#Main problem is that we are growing linearly by fully copying the list each search
 def bisect_search1(L,e):
     if L== []:
         return False
@@ -167,3 +166,6 @@ def bisect_search1(L,e):
             return bisect_search1(L[half:], e)
 
 
+#implementation 2
+#Instead of copying the full list each time, we are just going to move the start:end pointers
+#Search the same list each recursion, just change start and end point
