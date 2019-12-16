@@ -71,15 +71,35 @@
 #     return string.capwords(userinput)
 #
 # print(toJadenCase('q w e r'))
+#
+# def digital_root(n):
+#     running_sum=0
+#     for i in str(n):
+#         running_sum+= int(i)
+#     if len(str(running_sum)) > 1:
+#         return digital_root(running_sum)
+#     else:
+#         return running_sum
+#
+# print(digital_root(444))
 
-def digital_root(n):
-    running_sum=0
+#
+# def add_binary(a,b):
+#     return format(a+b, "b")
+#
+# print(add_binary(1,1))
+
+
+
+def persistence(n, counter=0):
+    if len(str(n)) == 1:
+        return counter
+    product = 1
+    counter+=1
     for i in str(n):
-        running_sum+= int(i)
-    if len(str(running_sum)) > 1:
-        return digital_root(running_sum)
-    else:
-        return running_sum
+        product *= int(i)
+    return persistence(product, counter)
 
 
-print(digital_root(444))
+
+print(persistence(39))
