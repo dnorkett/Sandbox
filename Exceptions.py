@@ -1,3 +1,7 @@
+"""
+Test file used to illustrate different exception options
+"""
+
 while True:
     try:
         a = int(input("Enter a number: "))

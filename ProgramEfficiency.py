@@ -1,3 +1,7 @@
+"""
+Test file used for note taking during Program Efficiency lecture. Not meant to be run / analyzed
+"""
+
 #1. Measure with a timer
 #2. Count the operations
 #3. *PREFERRED* Abstract notion of order of growth (BIG O NOTATION)
@@ -168,4 +172,135 @@ def bisect_search1(L,e):
 
 #implementation 2
 #Instead of copying the full list each time, we are just going to move the start:end pointers
-#Search the same list each recursion, just change start and end point
+#Search the same list each recursion, just change start and end point. Don't copy to new list each time.
+#Complexity of recursion is again O(log n), where n is len(L)
+#Logarithmic algorithm
+def bisect_search2(L,e):
+    def bisect_search_helper(L,e,low,high):
+        if high == low:
+            return L[low] == e
+        mid = (low + high) // 2
+        if L[mid] == e:
+            return True
+        elif L[mid] > e:
+            if low == mid: #nothing left to search
+                return False
+            else:
+                return bisect_search_helper(L,e,low, mid-1)
+        else:
+            return bisect_search_helper(L,e,mid+1, high)
+    if len(L) == 0:
+        return False
+    else:
+        return bisect_search_helper(L,e,0, len(L) - 1)
+
+
+#Logarithmic algorithm
+#How many times through loop? How many times can one divide i by 10?
+    #O(log(i))
+def intToStr(i):
+    digits = '0123456789'
+    if i == 0:
+        return '0'
+    result = ''
+    while i > 0:
+        result = digits[i%10] + result
+        i = i//10
+    return result
+
+print(intToStr(1972))
+
+
+#Linear algorithm
+#Iterative loop, searching a string etc.
+#Overall O(n), n times round loop, constant cost each time
+#In general, reducing size of problem by 1 each time is linear (unless theres loop in a loop, etc)
+def fact_iter(n):
+    prod = 1
+    for i in range(1, n+1):
+        prod *= i
+    return prod
+
+def fact_recur(n):
+    """assume n>= 0"""
+    if n <= 1:
+        return 1
+    else:
+        return n*fact_recur(n-1)
+
+
+#Polynomial algorithms
+#Most common polynomial algorithms are quadratic, i.e. complexity grows with square of size of input
+#Common occurs when we have nested loops or recursive function calls
+
+
+#Exponential algorithms
+#Recursive functions where more than one recursive call for each size of problem (Towers of Hanoi)
+#Many important problems are inherently exponential. Cost can be high, can lead to approximate solutions
+
+#Complexity of Towers of Hanoi
+#Let t(n) denote time to solve tower of size n
+#t(n) = 2t(n-1) + 1
+#     = 2[2t(n-2+1)]+1
+#     = 4t(n-2)+2+1
+#     = 4[2t(n-3)+1]+2+1
+#     = 8t(n-3)+4+2+1
+#     ...
+#     = 2^k t(n-k)+2^(k-1)+...+4+2+1
+#     = 2^(n-1)+2^(n-2)+...+4+2+1
+
+#Geometric growth
+#  a = 2^(n-1)+...+2+1
+# 2a = 2^n+2^(n-1)+...+2
+#  a = 2^n -1
+#Exponential algorithm example
+def genSubsets(L):
+    if len(L) == 0:
+        return [[]]#list of empty list
+    smaller = genSubsets(L[:-1]) #all subsets without last element
+    extra = L[-1:] #create a list of just last element
+    new = []
+    for small in smaller:
+        new.append(small + extra) #for all smaller solutions, add one with last element
+    return smaller+new #combine those with last element and those without
+print(genSubsets([1,2,3,4]))
+
+#assuming append is constant time
+#time includes time to solve smaller problem, plus time needed to make a copy of all elements in smaller problem
+#but important to think about size of smaller
+#know that for a set of size k there are 2^k cases. O(2^n)
+
+#COMPLEXITY CASES
+#O(1) - code does not depend on size of problem
+#O(log n) - reduce problem in half each time through process
+#O(n) - simple iterative or recursive programs
+#O(n log n) - ???
+#O(n^c) - nested loops or recursive calls
+#O(c^n) - multiple recursive calls at each level
+
+
+#Complexity of iterative fibonacci
+def fib_iter(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        fib_i = 0
+        fib_ii = 1
+        for i in range(n-1):
+            tmp = fib_i
+            fib_i = fib_ii
+            fib_ii = tmp + fib_ii
+        return fib_ii
+#Overall is O(n), linear, due to single for loop
+
+#Complexity of recursive fibonacci
+def fib_recur(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fib_recur(n-1) + fib_recur(n-2)
+#Overall is O(2^n), exponential, two recursive calls inside of one call

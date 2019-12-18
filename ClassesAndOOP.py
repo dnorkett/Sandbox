@@ -1,3 +1,6 @@
+"""
+Test file used for note taking during Classes and OOP lecture. Not meant to be run / analyzed
+"""
 import random
 
 class Coordinate(object):

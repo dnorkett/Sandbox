@@ -1,4 +1,7 @@
-#Calculate what percentage of income to save to afford a home down payment in 3 years
+"""
+Calculates the percentage of income to save to afford a home down payment 3 years from now
+Used to test a bisection search
+"""
 annual_salary = float(input('Enter your starting annual salary:'))
 total_cost = 1000000
 portion_down_payment = .25 * total_cost
