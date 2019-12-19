@@ -1,6 +1,7 @@
 import math
 import random
 import string
+import copy
 
 VOWELS = 'aeiou'
 CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
@@ -8,7 +9,7 @@ HAND_SIZE = 7
 
 SCRABBLE_LETTER_VALUES = {
     'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1,
-    'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
+    'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10, '*': 0
 }
 
 WORDLIST_FILENAME = "words2.txt"
@@ -92,43 +93,33 @@ def deal_hand(n):
     num_vowels = int(math.ceil(n / 3))
 
     for i in range(num_vowels):
-        x = random.choice(VOWELS)
-        hand[x] = hand.get(x, 0) + 1
+        if i == 0:
+            hand['*'] = 1
+        else:
+            x = random.choice(VOWELS)
+            hand[x] = hand.get(x, 0) + 1
 
     for i in range(num_vowels, n):
         x = random.choice(CONSONANTS)
         hand[x] = hand.get(x, 0) + 1
     return hand
 
-
-#
-# Problem #2: Update a hand by removing letters
-#
 def update_hand(hand, word):
     """
-    Does NOT assume that hand contains every letter in word at least as
-    many times as the letter appears in word. Letters in word that don't
-    appear in hand should be ignored. Letters that appear in word more times
-    than in hand should never result in a negative count; instead, set the
-    count in the returned hand to 0 (or remove the letter from the
-    dictionary, depending on how your code is structured).
-
     Updates the hand: uses up the letters in the given word
     and returns the new hand, without those letters in it.
-
-    Has no side effects: does not modify hand.
 
     word: string
     hand: dictionary (string -> int)
     returns: dictionary (string -> int)
     """
+    new_hand = copy.deepcopy(hand)
+    for letter in word.lower():
+        if new_hand.get(letter,0) > 0:
+            new_hand[letter] = new_hand.get(letter,0) - 1
+    return new_hand
 
-    pass  # TO DO... Remove this line when you implement this function
 
-
-#
-# Problem #3: Test word validity
-#
 def is_valid_word(word, hand, word_list):
     """
     Returns True if word is in the word_list and is entirely
@@ -140,22 +131,36 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     returns: boolean
     """
+    word = word.lower()
+    possible_words = []
 
-    pass  # TO DO... Remove this line when you implement this function
+    for vowel in VOWELS:
+        possible_words.append(word.replace('*', vowel))
+
+    for letter in word:
+        if word.count(letter) > hand.get(letter, 0):
+            return False
+
+    if word not in word_list:
+        if '*' in word:
+            for item in possible_words:
+                if item in word_list:
+                    return True
+        return False
+
+    return True
 
 
-#
-# Problem #5: Playing a hand
-#
 def calculate_handlen(hand):
     """
     Returns the length (number of letters) in the current hand.
-
     hand: dictionary (string-> int)
     returns: integer
     """
-
-    pass  # TO DO... Remove this line when you implement this function
+    handlen=0
+    for key in hand:
+        handlen += hand[key]
+    return handlen
 
 
 def play_hand(hand, word_list):
