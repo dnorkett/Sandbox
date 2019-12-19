@@ -216,14 +216,6 @@ def play_hand(hand, word_list):
     print('Total score: ', total_score, 'points.')
     return total_score
 
-#
-# Problem #6: Playing a game
-#
-
-
-#
-# procedure you will use to substitute a letter in a hand
-#
 
 def substitute_hand(hand, letter):
     """
@@ -285,11 +277,6 @@ def play_game(word_list):
     print("play_game not implemented.")  # TO DO... Remove this line when you implement this function
 
 
-#
-# Build data structures used for entire session and play game
-# Do not remove the "if __name__ == '__main__':" line - this code is executed
-# when the program is run directly, instead of through an import statement
-#
 if __name__ == '__main__':
     word_list = load_words()
     play_game(word_list)
