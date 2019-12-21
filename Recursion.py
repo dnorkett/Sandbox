@@ -19,3 +19,14 @@ def fact(n):
         return 1
     else:
         return n*fact(n-1)
+
+
+def isPalindrome(input):
+    input = input.replace(" ", "")
+    input = input.lower()
+    if len(input) <= 1:
+        return True
+    elif input[0] == input[-1]:
+        return isPalindrome(input[1:-1])
+    else:
+        return False

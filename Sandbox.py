@@ -90,16 +90,63 @@
 # print(add_binary(1,1))
 
 
+#
+# def persistence(n, counter=0):
+#     if len(str(n)) == 1:
+#         return counter
+#     product = 1
+#     counter+=1
+#     for i in str(n):
+#         product *= int(i)
+#     return persistence(product, counter)
+#
+#
+#
+# print(persistence(39))
 
-def persistence(n, counter=0):
-    if len(str(n)) == 1:
-        return counter
-    product = 1
-    counter+=1
-    for i in str(n):
-        product *= int(i)
-    return persistence(product, counter)
+# def isPalindrome(input):
+#     input = input.replace(" ", "")
+#     input = input.lower()
+#     if len(input) <= 1:
+#         return True
+#     elif input[0] == input[-1]:
+#         return isPalindrome(input[1:-1])
+#     else:
+#         return False
+#
+# print(isPalindrome('soaoos'))
+#
+
+def get_permutations(sequence):
+    '''
+    Enumerate all permutations of a given string
+    sequence (string): an arbitrary string to permute. Assume that it is a
+    non-empty string.
+    You MUST use recursion for this part. Non-recursive solutions will not be
+    accepted.
+    Returns: a list of all permutations of sequence
+    Example:
+    >>> get_permutations('abc')
+    ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
+    Note: depending on your implementation, you may return the permutations in
+    a different order than what is listed here.
+    '''
+
+    if len(sequence) <= 1:
+        return [sequence]
+    else:
+        permutations = []
+        first_char = sequence[0]
+        next_chars = sequence[1:]
+        permutations_of_subsequence = get_permutations(next_chars)
+        for seq in permutations_of_subsequence:
+            for index in range(len(seq) + 1):
+                new_seq = seq[0:index] + first_char + seq[index:len(seq) + 1]
+                permutations.append(new_seq)
+
+        # print(permutations)
+        return permutations
 
 
+print(get_permutations('abc'))
 
-print(persistence(39))
