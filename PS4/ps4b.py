@@ -32,9 +32,9 @@ def is_word(word_list, word):
     Returns: True if word is in word_list, False otherwise
 
     Example:
-    >>> is_word(word_list, 'bat') returns
+    is_word(word_list, 'bat') returns
     True
-    >>> is_word(word_list, 'asdf') returns
+    is_word(word_list, 'asdf') returns
     False
     '''
     word = word.lower()
@@ -57,15 +57,14 @@ WORDLIST_FILENAME = 'words.txt'
 class Message(object):
     def __init__(self, text):
         '''
-        Initializes a Message object
-                
         text (string): the message's text
 
         a Message object has two attributes:
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        self.message_text = text
+        self.valid_words = load_words(words.txt)
 
     def get_message_text(self):
         '''
