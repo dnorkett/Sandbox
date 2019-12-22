@@ -8,14 +8,14 @@ def load_words(file_name):
     
     Returns: a list of valid words. Words are strings of lowercase letters.
     '''
-    print("Loading word list from file...")
+    #print("Loading word list from file...")
     # inFile: file
     inFile = open(file_name, 'r')
     # wordlist: list of strings
     wordlist = []
     for line in inFile:
         wordlist.extend([word.lower() for word in line.split(' ')])
-    print("  ", len(wordlist), "words loaded.")
+    #print("  ", len(wordlist), "words loaded.")
     return wordlist
 
 def is_word(word_list, word):
@@ -87,8 +87,13 @@ class Message(object):
         '''
         shift_dict = self.build_shift_dict(shift)
         shifted_message_text = ''
+        lower_letters = 'abcdefghijklmnopqrstuvwxyz'
+        upper_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         for char in self.message_text:
-            shifted_message_text += shift_dict[char]
+            if char in lower_letters or char in upper_letters:
+                shifted_message_text += shift_dict[char]
+            else:
+                shifted_message_text += char
 
         return shifted_message_text
 
@@ -160,14 +165,17 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        #print(self.message_text, self.valid_words)
+        print(self.message_text)
         split_str=self.message_text.split()
+        print(split_str)
         decrypt_key = 0
         decrypt_key_counter = 0
+        tempHolder = self.message_text
 
         for i in range(26):
             temp_key_counter = 0
             for word in split_str:
+                self.message_text = word
                 new_word = (self.apply_shift(26-i))
                 if is_word(self.get_valid_words(), new_word):
                     temp_key_counter += 1
@@ -175,16 +183,20 @@ class CiphertextMessage(Message):
                 decrypt_key = 26-i
                 decrypt_key_counter = temp_key_counter
 
+        self.message_text = tempHolder
         return(decrypt_key, self.apply_shift(decrypt_key))
 
 
 
 if __name__ == '__main__':
-    plaintext = PlaintextMessage('hello', 2)
-    print('Expected Output: jgnnq')
-    print('Actual Output:', plaintext.get_message_text_encrypted())
+    # plaintext = PlaintextMessage('hello', 2)
+    # print('Expected Output: jgnnq')
+    # print('Actual Output:', plaintext.get_message_text_encrypted())
+    #
+    # #Example test case (CiphertextMessage)
+    # ciphertext = CiphertextMessage('jgnnq')
+    # print('Expected Output:', (24, 'hello'))
+    # print('Actual Output:', ciphertext.decrypt_message())
 
-    #Example test case (CiphertextMessage)
-    ciphertext = CiphertextMessage('jgnnq')
-    print('Expected Output:', (24, 'hello'))
-    print('Actual Output:', ciphertext.decrypt_message())
+    cipherStory = CiphertextMessage(get_story_string())
+    print(cipherStory.decrypt_message())
