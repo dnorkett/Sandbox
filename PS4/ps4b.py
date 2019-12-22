@@ -1,4 +1,5 @@
 import string
+import copy
 
 ### HELPER CODE ###
 def load_words(file_name):
@@ -58,21 +59,12 @@ class Message(object):
     def __init__(self, text):
         '''
         text (string): the message's text
-
-        a Message object has two attributes:
-            self.message_text (string, determined by input text)
-            self.valid_words (list, determined using helper function load_words)
         '''
         self.message_text = text
         self.valid_words = load_words(words.txt)
 
     def get_message_text(self):
-        '''
-        Used to safely access self.message_text outside of the class
-        
-        Returns: self.message_text
-        '''
-        pass #delete this line and replace with your code here
+        return self.message_text
 
     def get_valid_words(self):
         '''
@@ -81,7 +73,8 @@ class Message(object):
         
         Returns: a COPY of self.valid_words
         '''
-        pass #delete this line and replace with your code here
+        valid_words_copy = copy.copy(self.valid_words)
+        return valid_words_copy
 
     def build_shift_dict(self, shift):
         '''
@@ -97,21 +90,28 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        pass #delete this line and replace with your code here
+        lower_letters = 'abcdefghijklmnopqrstuvwxyz'
+        upper_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        shifted_lower = lower_letters[shift:] + lower_letters[:shift]
+        shifted_upper = upper_letters[shift:] + upper_letters[:shift]
+        shift_dict = {}
+        for i in range(26):
+            lower_char = lower_letters[i]
+            upper_char = upper_letters[i]
+            shift_dict[lower_char] = shifted_lower[i]
+            shift_dict[upper_char] = shifted_upper[i]
+        return shift_dict
 
     def apply_shift(self, shift):
         '''
-        Applies the Caesar Cipher to self.message_text with the input shift.
-        Creates a new string that is self.message_text shifted down the
-        alphabet by some number of characters determined by the input shift        
-        
-        shift (integer): the shift with which to encrypt the message.
-        0 <= shift < 26
-
-        Returns: the message text (string) in which every character is shifted
-             down the alphabet by the input shift
+        Returns: the message text (string) in which every character is shifted down the alphabet by the input shift
         '''
-        pass #delete this line and replace with your code here
+        shift_dict = build_shift_dict(shift)
+        shifted_message_text = ''
+        for char in self.message_text:
+            shifted_message_text += shift_dict[char]
+
+        return shifted_message_text
 
 class PlaintextMessage(Message):
     def __init__(self, text, shift):
