@@ -104,27 +104,40 @@ class DescriptionTrigger(PhraseTrigger):
 
 # TIME TRIGGERS
 class TimeTrigger(Trigger):
-    def __init__(self, time_est):
-        self.time_est = time_est
+    def __init__(self, pubtime):
+        format = '%d %b %Y %H:%M:%S'
+        pubtime = datetime.strptime(pubtime, format)
+        pubtime = pubtime.replace(tzinfo=pytz.timezone("EST"))
+        self.pubtime = pubtime
 
-# Constructor:
-#        Input: Time has to be in EST and in the format of "%d %b %Y %H:%M:%S".
-#        Convert time from string to a datetime before saving it as an attribute.
+class BeforeTrigger(TimeTrigger):
+    def evaluate(self, story):
+        return self.pubtime > story.get_pubdate().replace(tzinfo=pytz.timezone("EST"))
 
-# Problem 6
-# TODO: BeforeTrigger and AfterTrigger
-
+class AfterTrigger(TimeTrigger):
+    def evaluate(self, story):
+        return self.pubtime < story.get_pubdate().replace(tzinfo=pytz.timezone("EST"))
 
 # COMPOSITE TRIGGERS
+class NotTrigger(Trigger):
+    def __init__(self, other_trigger):
+        self.other_trigger = other_trigger
+    def evaluate(self, story):
+        return not self.other_trigger.evaluate(story)
 
-# Problem 7
-# TODO: NotTrigger
+class AndTrigger(Trigger):
+    def __init__(self, other_trigger1, other_trigger2):
+        self.other_trigger1 = other_trigger1
+        self.other_trigger2 = other_trigger2
+    def evaluate(self, story):
+        return self.other_trigger1.evaluate(story) and self.other_trigger2.evaluate(story)
 
-# Problem 8
-# TODO: AndTrigger
-
-# Problem 9
-# TODO: OrTrigger
+class OrTrigger(Trigger):
+    def __init__(self, other_trigger1, other_trigger2):
+        self.other_trigger1 = other_trigger1
+        self.other_trigger2 = other_trigger2
+    def evaluate(self, story):
+        return self.other_trigger1.evaluate(story) or self.other_trigger2.evaluate(story)
 
 
 # ======================
