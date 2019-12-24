@@ -103,9 +103,10 @@ class DescriptionTrigger(PhraseTrigger):
         return self.is_phrase_in(story.get_description())
 
 # TIME TRIGGERS
+class TimeTrigger(Trigger):
+    def __init__(self, time_est):
+        self.time_est = time_est
 
-# Problem 5
-# TODO: TimeTrigger
 # Constructor:
 #        Input: Time has to be in EST and in the format of "%d %b %Y %H:%M:%S".
 #        Convert time from string to a datetime before saving it as an attribute.
