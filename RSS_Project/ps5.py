@@ -144,17 +144,19 @@ class OrTrigger(Trigger):
 # Filtering
 # ======================
 
-# Problem 10
 def filter_stories(stories, triggerlist):
     """
     Takes in a list of NewsStory instances.
 
     Returns: a list of only the stories for which a trigger in triggerlist fires.
     """
-    # TODO: Problem 10
-    # This is a placeholder
-    # (we're just returning all the stories, with no filtering)
-    return stories
+    valid_stories = []
+    for story in stories:
+        for trigger in triggerlist:
+            if trigger.evaluate(story) == True:
+                valid_stories.append(story)
+
+    return valid_stories
 
 
 # ======================
