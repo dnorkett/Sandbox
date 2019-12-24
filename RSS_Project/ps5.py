@@ -73,32 +73,31 @@ class Trigger(object):
 
 
 # PHRASE TRIGGERS
-
-# Problem 2
 class PhraseTrigger(Trigger):
     def __init__(self, phrase):
         self.phrase = phrase.lower()
 
     def is_phrase_in(self, text):
+        phrase = self.phrase
         text = text.lower()
 
-        for char in text:
-            if char in string.punctuation:
-                text = text.replace(char, ' ')
+        for char in string.punctuation:
+            text = text.replace(char, ' ')
 
         split_text = text.split()
 
         clean_text = ' '.join(split_text)
 
-        if clean_text in self.phrase:
-            return True
+        if re.findall('\\b' + phrase + '\\b', clean_text):
+            found = True
         else:
-            return False
+            found = False
+        return found
 
-# Problem 3
-# TODO: TitleTrigger
+class TitleTrigger(PhraseTrigger):
+    def evaluate(self, story):
+        return self.is_phrase_in(story.get_title())
 
-# Problem 4
 # TODO: DescriptionTrigger
 
 # TIME TRIGGERS
