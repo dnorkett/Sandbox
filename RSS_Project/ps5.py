@@ -98,7 +98,9 @@ class TitleTrigger(PhraseTrigger):
     def evaluate(self, story):
         return self.is_phrase_in(story.get_title())
 
-# TODO: DescriptionTrigger
+class DescriptionTrigger(PhraseTrigger):
+    def evaluate(self, story):
+        return self.is_phrase_in(story.get_description())
 
 # TIME TRIGGERS
 
