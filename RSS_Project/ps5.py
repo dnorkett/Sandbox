@@ -163,6 +163,25 @@ def filter_stories(stories, triggerlist):
 # User-Specified Triggers
 # ======================
 # Problem 11
+def create_trigger(trigger_type, phrase = None, time = None, trig1 = None, trig2 = None):
+    if trigger_type.lower() == 'title':
+        trigger = TitleTrigger(phrase)
+    elif trigger_type.lower() == 'description':
+        trigger = DescriptionTrigger(phrase)
+    elif trigger_type.lower() == 'after':
+        trigger = AfterTrigger(time)
+    elif trigger_type.lower() == 'before':
+        trigger = BeforeTrigger(time)
+    elif trigger_type.lower() == 'andtrig':
+        trigger = AndTrigger(trig1, trig2)
+    elif trigger_type.lower() == 'ortrig':
+        OrTrigger(trig1, trig2)
+    elif trigger_type.lower() == 'nottrig':
+        trigger = NotTrigger(trig1)
+
+    return trigger
+
+
 def read_trigger_config(filename):
     """
     filename: the name of a trigger configuration file
@@ -171,27 +190,51 @@ def read_trigger_config(filename):
         file.
     """
     trigger_file = open(filename, 'r')
+
     lines = []
-    TriggerList = p[]
+    TriggerList = []
+    TriggerDict = {}
+
     for line in trigger_file:
         line = line.rstrip()
         if not (len(line) == 0 or line.startswith('//')):
             lines.append(line)
-
     # line is the list of lines that you need to parse and for which you need
     # to build triggers
+
     for line in lines:
         line = line.split(',')
         print(line)
         print(line[0])
-        if line[0] == 'ADD':
-            pass
-
+        x = line[0]
+        if line[0].lower() == 'add':
+            for i in range(1, len(line)):
+                print('add:', line[i])
+                TriggerList.append(TriggerDict[line[i]])
+        elif line[1].lower() == 'title':
+            print('create title trigger')
+            TriggerDict[x] = create_trigger('title', line[2])
+        elif line[1].lower() == 'description':
+            print('create description trigger')
+            TriggerDict[x] = create_trigger('description', line[2])
+        elif line[1].lower() == 'after':
+            print('create after trigger')
+            TriggerDict[x] = create_trigger('after', None, line[2])
+        elif line[1].lower() == 'before':
+            print('create before trigger')
+            TriggerDict[x] = create_trigger('before', None, line[2])
+        elif line[1].lower() == 'and':
+            print('create and trigger')
+            TriggerDict[x] = create_trigger('andTrig', None, None, line[2], line[3])
+        elif line[1].lower() == 'or':
+            print('create or trigger')
+            TriggerDict[x] = create_trigger('orTrig', None, None, line[2], line[3])
+        elif line[1].lower() == 'not':
+            print('create not trigger')
+            TriggerDict[x] = create_trigger('notTrig', None, None, line[2])
+    print(TriggerList)
     return TriggerList
 
-
-
-    print(lines)  # for now, print it so you see what it contains!
 
 
 SLEEPTIME = 120  # seconds -- how often we poll
