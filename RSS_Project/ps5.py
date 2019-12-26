@@ -241,8 +241,6 @@ SLEEPTIME = 120  # seconds -- how often we poll
 
 
 def main_thread(master):
-    # A sample trigger list - you might need to change the phrases to correspond
-    # to what is currently in the news
     try:
         # Problem 11
         triggerlist = read_trigger_config('triggers.txt')
@@ -283,7 +281,9 @@ def main_thread(master):
             # Get stories from Yahoo's Top Stories RSS news feed
             stories.extend(process("http://news.yahoo.com/rss/topstories"))
 
+            #BELOW
             stories = filter_stories(stories, triggerlist)
+            ######
 
             list(map(get_cont, stories))
             scrollbar.config(command=cont.yview)
