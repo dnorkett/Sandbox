@@ -11,5 +11,3 @@ def calcSimpleInterest(rate,days, principle):
     interest = principle * rate * days / 365
 
     return interest
-
-print(calcSimpleInterest(.07, 36, 1000000))
