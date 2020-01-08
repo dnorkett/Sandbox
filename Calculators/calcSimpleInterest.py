@@ -1,4 +1,4 @@
-def calcSimpleInterest(rate,days, principle):
+def calcSimpleInterest(rate, days, principle, daycount=365):
     """
     calculates simple interest based on a yearly rate, the principal amount, and the number of days
 
@@ -8,6 +8,6 @@ def calcSimpleInterest(rate,days, principle):
 
     returns interest amount
     """
-    interest = principle * rate * days / 365
+    interest = principle * rate * days / daycount
 
     return interest
